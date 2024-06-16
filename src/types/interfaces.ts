@@ -28,6 +28,13 @@ export interface BaseMovieProps {
     }[];
   }
 
+  export interface MovieDetailsProps extends BaseMovieProps {
+    production_countries: {
+      id: number;
+      name: string;
+    }[];
+  }
+
   export interface MovieImage {
     file_path: string;
     aspect_ratio?: number; //some props are optional...
