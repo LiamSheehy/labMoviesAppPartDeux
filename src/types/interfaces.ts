@@ -16,7 +16,7 @@ export interface BaseMovieProps {
     vote_count: number;
     favourite?: boolean;
   }
-  
+
   export interface BaseMovieListProps { 
     movies: BaseMovie[];
   }   
@@ -26,4 +26,19 @@ export interface BaseMovieProps {
       id: number;
       name: string;
     }[];
+  }
+
+  export interface MovieImage {
+    file_path: string;
+    aspect_ratio?: number; //some props are optional...
+    height?: number;
+    iso_639_1?: string;
+    vote_average?: number;
+    vote_count?: number;
+    width?: number;
+  }
+  
+  export interface MoviePageProps {
+    movie: MovieDetailsProps;
+    images: MovieImage[];
   }
