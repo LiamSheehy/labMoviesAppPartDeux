@@ -1,5 +1,5 @@
 import React, { useState, useEffect, ChangeEvent } from "react";
-import { FilterOption } from "../../types/interfaces"
+import { FilterOption } from "../../types/interfaces";
 import { SelectChangeEvent } from "@mui/material";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -26,12 +26,12 @@ const styles = {
 };
 
 interface FilterMoviesCardProps {
-    onUserInput: (f: FilterOption, s: string)  => void; // Add this line
+    onUserInput: (f: FilterOption, s: string)  => void;
     titleFilter: string;
     genreFilter: string;
   }
 
-const FilterMoviesCard: React.FC<FilterMoviesCardProps> = ({ titleFilter, genreFilter, onUserInput }) => { //add onUserInput to destructured props 
+const FilterMoviesCard: React.FC<FilterMoviesCardProps> = ({ titleFilter, genreFilter, onUserInput }) => {
   const [genres, setGenres] = useState([{ id: '0', name: "All" }])
 
   useEffect(() => {
