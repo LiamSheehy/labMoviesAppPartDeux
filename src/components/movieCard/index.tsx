@@ -8,6 +8,7 @@ import CardHeader from "@mui/material/CardHeader";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd';
 import CalendarIcon from "@mui/icons-material/CalendarTodayTwoTone";
 import StarRateIcon from "@mui/icons-material/StarRate";
 import Grid from "@mui/material/Grid";
@@ -30,19 +31,21 @@ interface MovieCardProps {
 }
 
 const MovieCard: React.FC<MovieCardProps> = ({movie, action}) => {
-  const { favourites, addToFavourites } = useContext(MoviesContext);//NEW
+  const { favourites, mustWatch, addToFavourites, addToMustWatch } = useContext(MoviesContext);//NEW
 
 const isFavourite = favourites.find((id) => id === movie.id)? true : false;//NEW
+const isMustWatch = mustWatch.includes(movie.id);
 
   return (
       <Card sx={styles.card}>
       <CardHeader
-        avatar={
-          isFavourite ? (   //CHANGED
+         avatar={
+          (isFavourite || isMustWatch) && (
             <Avatar sx={styles.avatar}>
-              <FavoriteIcon />
+              {isFavourite && <FavoriteIcon />}
+              {isMustWatch && <PlaylistAddIcon />}
             </Avatar>
-          ) : null
+          )
         }
         title={
           <Typography variant="h5" component="p">

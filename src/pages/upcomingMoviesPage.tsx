@@ -3,13 +3,15 @@ import PageTemplate from '../components/templateMovieListPage';
 import { BaseMovieProps } from "../types/interfaces";
 import { getUpcomingMovies } from "../api/tmdb-api";
 import AddToFavouritesIcon from '../components/cardIcons/addToFavourites';
+import AddToPlaylistIcon from '../components/cardIcons/addToMustWatch';
 import useFiltering from "../hooks/useFiltering";
 import MovieFilterUI, {
   titleFilter,
   genreFilter,
 } from "../components/movieFilterUI";
 import Spinner from "../components/spinner";
-import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd';
+
+
 import { useQuery } from 'react-query';
 
 const titleFiltering = {
@@ -58,7 +60,7 @@ const UpcomingMoviesPage: React.FC = () => {
         action={(movie: BaseMovieProps) => (
           <>
             <AddToFavouritesIcon {...movie} />
-            <PlaylistAddIcon />
+            <AddToPlaylistIcon {...movie} />
           </>
         )}
       />
