@@ -15,15 +15,15 @@ import Alert from "@mui/material/Alert";
 
 
 const ReviewForm: React.FC<BaseMovieProps> = (movie) => {
-    const defaultValues = {
-        defaultValues: {
-          author: "",
-          review: "",
-          agree: false,
-          rating: 3,
-          movieId: 0,
-        }
-      };
+        const defaultValues = {
+            defaultValues: {
+            author: "",
+            review: "",
+            agree: false,
+            rating: 3,
+            movieId: 0,
+            }
+        };
     
       const {
         control,
