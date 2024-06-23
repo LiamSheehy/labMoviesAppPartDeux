@@ -82,3 +82,11 @@ export interface BaseMovieProps {
     movies: BaseMovieProps[];
     action: (m: BaseMovieProps) => React.ReactNode;
   }
+
+  export interface Review {
+    author: string,
+    content: string,
+    agree: boolean,
+    rating: number,
+    movieId: number,
+  }
