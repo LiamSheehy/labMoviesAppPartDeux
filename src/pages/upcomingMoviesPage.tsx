@@ -10,6 +10,7 @@ import MovieFilterUI, {
 } from "../components/movieFilterUI";
 import Spinner from "../components/spinner";
 import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd';
+import { useQuery } from 'react-query';
 
 const titleFiltering = {
   name: "title",
@@ -23,16 +24,18 @@ const genreFiltering = {
 };
 
 const UpcomingMoviesPage: React.FC = () => {
-  const [movies, setMovies] = useState<BaseMovieProps[]>([]);
-  const { filterValues, setFilterValues, filterFunction } = useFiltering(
-    [titleFiltering, genreFiltering]
-  );
+    const { data, error, isLoading, isError } = useQuery<BaseMovieProps[], Error>('upcoming', getUpcomingMovies);
+    const { filterValues, setFilterValues, filterFunction } = useFiltering(
+      [titleFiltering, genreFiltering]
+    );
 
-  useEffect(() => {
-    getUpcomingMovies().then(movies => {
-      setMovies(movies);
-    });
-  }, []);
+  if (isLoading) {
+    return <Spinner />;
+  }
+
+  if (isError) {
+    return <h1>{error.message}</h1>;
+  }
 
   const changeFilterValues = (type: string, value: string) => {
     const changedFilter = { name: type, value: value };
@@ -43,11 +46,9 @@ const UpcomingMoviesPage: React.FC = () => {
     setFilterValues(updatedFilterSet);
   };
 
+  
+  const movies = data || []; 
   const displayedMovies = filterFunction(movies);
-
-  if (movies.length === 0) {
-    return <Spinner />;
-  }
 
   return (
     <>
