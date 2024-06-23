@@ -1,6 +1,8 @@
-import React, { useState, useEffect, ChangeEvent } from "react";
+import React, { ChangeEvent } from "react";
 import { getGenres } from "../../api/tmdb-api";
-import { FilterOption } from "../../types/interfaces";
+import { FilterOption, GenreData  } from "../../types/interfaces";
+import { useQuery } from "react-query";
+import Spinner from '../spinner';
 import { SelectChangeEvent } from "@mui/material";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -32,29 +34,33 @@ interface FilterMoviesCardProps {
     genreFilter: string;
   }
 
-const FilterMoviesCard: React.FC<FilterMoviesCardProps> = ({ titleFilter, genreFilter, onUserInput }) => {
-  const [genres, setGenres] = useState([{ id: '0', name: "All" }])
-
-  useEffect(() => {
-    getGenres().then((allGenres) => {
-      setGenres([genres[0], ...allGenres]);
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-
-  const handleChange = (e: SelectChangeEvent, type: FilterOption, value: string) => {
-    e.preventDefault()
-    onUserInput(type, value)
-  };
-
-  const handleTextChange = (e: ChangeEvent<HTMLInputElement>) => {
-    handleChange(e, "title", e.target.value)
-  }
-
-  const handleGenreChange = (e: SelectChangeEvent) => {
-    handleChange(e, "genre", e.target.value)
-  };
-
+  const FilterMoviesCard: React.FC<FilterMoviesCardProps> = ({ titleFilter, genreFilter, onUserInput }) => {
+    const { data, error, isLoading, isError } = useQuery<GenreData, Error>("genres", getGenres);
+  
+    if (isLoading) {
+      return <Spinner />;
+    }
+    if (isError) {
+      return <h1>{(error as Error).message}</h1>;
+    }
+    const genres = data?.genres || [];
+    if (genres[0].name !== "All") {
+      genres.unshift({ id: "0", name: "All" });
+    }
+  
+    const handleChange = (e: SelectChangeEvent, type: FilterOption, value: string) => {
+      e.preventDefault()
+        onUserInput(type, value)
+    };
+  
+    const handleTextChange = (e: ChangeEvent<HTMLInputElement>) => {
+      handleChange(e, "title", e.target.value)
+    }
+  
+    const handleGenreChange = (e: SelectChangeEvent) => {
+      handleChange(e, "genre", e.target.value)
+    };
+  
   return (
     <>
     <Card sx={styles.root} variant="outlined">
