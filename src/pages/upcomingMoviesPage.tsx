@@ -9,6 +9,7 @@ import MovieFilterUI, {
   genreFilter,
 } from "../components/movieFilterUI";
 import Spinner from "../components/spinner";
+import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd';
 
 const titleFiltering = {
   name: "title",
@@ -53,7 +54,12 @@ const UpcomingMoviesPage: React.FC = () => {
       <PageTemplate
         title="Upcoming Movies"
         movies={displayedMovies}
-        action={(movie: BaseMovieProps) => <AddToFavouritesIcon {...movie} />}
+        action={(movie: BaseMovieProps) => (
+          <>
+            <AddToFavouritesIcon {...movie} />
+            <PlaylistAddIcon />
+          </>
+        )}
       />
       <MovieFilterUI
         onFilterValuesChange={changeFilterValues}
