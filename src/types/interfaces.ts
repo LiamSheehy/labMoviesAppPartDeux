@@ -18,7 +18,6 @@ export interface BaseMovieProps {
   genre_ids?: number[];
 }
 
-// New Interface for TV Series
 export interface BaseTVSeriesProps {
   name: string;
   first_air_date: string;
@@ -42,13 +41,13 @@ export interface BaseTVSeriesProps {
 
 export interface BaseMovieListProps { 
   movies: BaseMovieProps[];
-  selectFavourite: (movieId: number) => void;
-}   
+  action: (m: BaseMovieProps) => React.ReactNode;
+}
 
 export interface BaseTVSeriesListProps { 
   tvSeries: BaseTVSeriesProps[];
-  selectFavourite: (seriesId: number) => void;
-}   
+  action: (s: BaseTVSeriesProps) => React.ReactNode;
+}
 
 export interface MovieDetailsProps extends BaseMovieProps {
   genres: {
@@ -84,7 +83,6 @@ export interface MovieImage {
   width?: number;
 }
 
-// Interface for TV Series Images
 export interface TVSeriesImage {
   file_path: string;
   aspect_ratio?: number;
@@ -129,15 +127,15 @@ export interface TVSeriesReview {
 
 export interface GenreData {
   genres: {
-      id: string;
-      name: string;
+    id: string;
+    name: string;
   }[];
 }
 
 export interface TVGenreData {
   genres: {
-      id: string;
-      name: string;
+    id: string;
+    name: string;
   }[];
 }
 
@@ -153,30 +151,4 @@ export interface DiscoverTVSeries {
   total_pages: number;
   total_results: number;
   results: BaseTVSeriesProps[];
-}
-
-export interface BaseMovieListProps {
-  movies: BaseMovieProps[];
-  action: (m: BaseMovieProps) => React.ReactNode;
-}
-
-export interface BaseTVSeriesListProps {
-  tvSeries: BaseTVSeriesProps[];
-  action: (s: BaseTVSeriesProps) => React.ReactNode;
-}
-
-export interface Review {
-  author: string;
-  content: string;
-  agree: boolean;
-  rating: number;
-  movieId: number;
-}
-
-export interface TVSeriesReview {
-  author: string;
-  content: string;
-  agree: boolean;
-  rating: number;
-  tvSeriesId: number;
 }
