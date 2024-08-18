@@ -1,7 +1,7 @@
 import React from "react";
-import { Review } from "../../types/interfaces";
+import { TVSeriesReview } from "../../types/interfaces";
 
-const TVSeriesReview: React.FC<Review> = (props) => {
+const TVReview: React.FC<TVSeriesReview> = (props) => {
   return (
     <>
       <p>Review By: {props.author} </p>
@@ -10,4 +10,4 @@ const TVSeriesReview: React.FC<Review> = (props) => {
   );
 };
 
-export default TVSeriesReview;
+export default TVReview;

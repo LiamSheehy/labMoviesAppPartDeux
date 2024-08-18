@@ -44,7 +44,7 @@ const App = () => {
                 <Route path="/tvseries" element={<TVSeries />} />
                 <Route path="/tvseries/favourites" element={<FavouriteTVPage />} />
                 <Route path="/tvseriespage/:id" element={<TVSeriesDetailsPage />} /> 
-                <Route path="/tvseries/reviews/:id" element={<TVSeriesReviewPage />} /> 
+                <Route path="/tvseries/tvreviews/:id" element={<TVSeriesReviewPage />} /> 
                 <Route path="/tvseries/reviews/form" element={<AddTVSeriesReviewPage />} />
                 <Route path="/" element={<HomePage />} />
                 <Route path="*" element={<Navigate to="/" />} />

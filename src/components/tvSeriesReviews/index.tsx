@@ -9,7 +9,7 @@ import Paper from "@mui/material/Paper";
 import { Link } from "react-router-dom";
 import { getTVSeriesReviews } from "../../api/tmdb-api";
 import { excerpt } from "../../util";
-import { TVSeriesDetailsProps, Review } from "../../types/interfaces";
+import { TVSeriesDetailsProps, TVSeriesReview } from "../../types/interfaces";
 
 const styles = {
     table: {
@@ -18,14 +18,14 @@ const styles = {
 };
 
 const TVSeriesReviews: React.FC<TVSeriesDetailsProps> = (tvSeries) => { 
-    const [reviews, setReviews] = useState<Review[]>([]);
+    const [reviews, setReviews] = useState([]);
 
     useEffect(() => {
         getTVSeriesReviews(tvSeries.id).then((reviews) => {
             setReviews(reviews);
         });
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [tvSeries.id]);
+    }, []);
 
     return (
         <TableContainer component={Paper}>
@@ -38,7 +38,7 @@ const TVSeriesReviews: React.FC<TVSeriesDetailsProps> = (tvSeries) => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {reviews.map((r: Review) => (
+                    {reviews.map((r: TVSeriesReview) => (
                         <TableRow key={r.id}>
                             <TableCell component="th" scope="row">
                                 {r.author}
@@ -46,7 +46,7 @@ const TVSeriesReviews: React.FC<TVSeriesDetailsProps> = (tvSeries) => {
                             <TableCell>{excerpt(r.content)}</TableCell>
                             <TableCell>
                                 <Link
-                                    to={`/reviews/${r.id}`}
+                                    to={`/tvreviews/${r.id}`}
                                     state={{
                                         review: r,
                                         tvSeries: tvSeries,
