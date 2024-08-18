@@ -16,6 +16,7 @@ import img from '../../images/film-poster-placeholder.png';
 import { BaseTVSeriesProps } from "../../types/interfaces"; 
 import { Link } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
+import AddToFavouritesIcon from "../cardIcons/addToTVFavourites";
 
 const styles = {
   card: { maxWidth: 345 },
@@ -31,7 +32,7 @@ interface TVSeriesCardProps {
 }
 
 const TVSeriesCard: React.FC<TVSeriesCardProps> = ({ tvSeries, action }) => {
-  const { favourites, mustWatch, addToFavourites, addToMustWatch } = useContext(TVSeriesContext);
+  const { favourites, mustWatch, addToTVFavourites, addToMustWatch } = useContext(TVSeriesContext);
 
   const isFavourite = favourites.find((id) => id === tvSeries.id) ? true : false;
   const isMustWatch = mustWatch.includes(tvSeries.id);
@@ -79,7 +80,7 @@ const TVSeriesCard: React.FC<TVSeriesCardProps> = ({ tvSeries, action }) => {
       </CardContent>
       <CardActions disableSpacing>
         {action(tvSeries)}
-        <Link to={`/tvseries/${tvSeries.id}`}>
+        <Link to={`/tvseries/${tvSeries.name}`}>
           <Button variant="outlined" size="medium" color="primary">
             More Info ...
           </Button>
@@ -87,6 +88,6 @@ const TVSeriesCard: React.FC<TVSeriesCardProps> = ({ tvSeries, action }) => {
       </CardActions>
     </Card>
   );
-};
+}
 
 export default TVSeriesCard;

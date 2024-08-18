@@ -3,8 +3,10 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Route, Navigate, Routes } from "react-router-dom";
 import HomePage from "./pages/homePage";
 import MoviePage from "./pages/movieDetailsPage";
-import TVSeriesPage from "./pages/tvSeriesDetailsPage"; 
+import TVSeriesDetailsPage from "./pages/tvSeriesDetailsPage"; 
+import TVSeries from "./pages/TVSeriesPage"; 
 import FavouriteMoviesPage from "./pages/favouriteMoviesPage"; 
+import FavouriteTVPage from "./pages/favouriteTVSeriesPage"; 
 import TVSeriesReviewPage from "./pages/tvSeriesReviewPage"; 
 import MovieReviewPage from "./pages/movieReviewPage";
 import UpcomingMoviesPage from "./pages/upcomingMoviesPage";
@@ -39,7 +41,9 @@ const App = () => {
                 <Route path="/movies/upcoming" element={<UpcomingMoviesPage />} />
                 <Route path="/movies/reviews/:id" element={<MovieReviewPage />} />
                 <Route path="/movies/reviews/form" element={<AddMovieReviewPage />} />
-                <Route path="/tvseries/:id" element={<TVSeriesPage />} /> 
+                <Route path="/tvseries" element={<TVSeries />} />
+                <Route path="/tvseries/favourites" element={<FavouriteTVPage />} />
+                <Route path="/tvseries/:id" element={<TVSeriesDetailsPage />} /> 
                 <Route path="/tvseries/reviews/:id" element={<TVSeriesReviewPage />} /> 
                 <Route path="/tvseries/reviews/form" element={<AddTVSeriesReviewPage />} />
                 <Route path="/" element={<HomePage />} />

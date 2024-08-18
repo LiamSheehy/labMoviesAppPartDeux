@@ -1,6 +1,6 @@
 import React, { ChangeEvent } from "react";
 import { getGenres } from "../../api/tmdb-api";
-import { FilterOption, GenreData  } from "../../types/interfaces";
+import { FilterOption, GenreData } from "../../types/interfaces";
 import { useQuery } from "react-query";
 import Spinner from '../spinner';
 import { SelectChangeEvent } from "@mui/material";
@@ -20,7 +20,7 @@ const styles = {
     maxWidth: 345,
   },
   media: { height: 300 },
- 
+
   formControl: {
     margin: 1,
     minWidth: 220,
@@ -29,84 +29,128 @@ const styles = {
 };
 
 interface FilterMoviesCardProps {
-    onUserInput: (f: FilterOption, s: string)  => void;
-    titleFilter: string;
-    genreFilter: string;
+  onUserInput: (f: FilterOption, s: string) => void;
+  titleFilter: string;
+  genreFilter: string;
+  yearFilter: string;
+  languageFilter: string;
+}
+
+const FilterMoviesCard: React.FC<FilterMoviesCardProps> = ({
+  titleFilter,
+  genreFilter,
+  yearFilter,
+  languageFilter,
+  onUserInput,
+}) => {
+  const { data, error, isLoading, isError } = useQuery<GenreData, Error>("genres", getGenres);
+
+  if (isLoading) {
+    return <Spinner />;
+  }
+  if (isError) {
+    return <h1>{(error as Error).message}</h1>;
+  }
+  const genres = data?.genres || [];
+  if (genres[0].name !== "All") {
+    genres.unshift({ id: "0", name: "All" });
   }
 
-  const FilterMoviesCard: React.FC<FilterMoviesCardProps> = ({ titleFilter, genreFilter, onUserInput }) => {
-    const { data, error, isLoading, isError } = useQuery<GenreData, Error>("genres", getGenres);
-  
-    if (isLoading) {
-      return <Spinner />;
-    }
-    if (isError) {
-      return <h1>{(error as Error).message}</h1>;
-    }
-    const genres = data?.genres || [];
-    if (genres[0].name !== "All") {
-      genres.unshift({ id: "0", name: "All" });
-    }
-  
-    const handleChange = (e: SelectChangeEvent, type: FilterOption, value: string) => {
-      e.preventDefault()
-        onUserInput(type, value)
-    };
-  
-    const handleTextChange = (e: ChangeEvent<HTMLInputElement>) => {
-      handleChange(e, "title", e.target.value)
-    }
-  
-    const handleGenreChange = (e: SelectChangeEvent) => {
-      handleChange(e, "genre", e.target.value)
-    };
-  
+  const handleChange = (e: SelectChangeEvent, type: FilterOption, value: string) => {
+    e.preventDefault();
+    onUserInput(type, value);
+  };
+
+  const handleTextChange = (e: ChangeEvent<HTMLInputElement>) => {
+    handleChange(e, "title", e.target.value);
+  };
+
+  const handleGenreChange = (e: SelectChangeEvent) => {
+    handleChange(e, "genre", e.target.value);
+  };
+
+  const handleYearChange = (e: ChangeEvent<HTMLInputElement>) => {
+    handleChange(e, "release_year", e.target.value);
+  };
+
+  const handleLanguageChange = (e: ChangeEvent<HTMLInputElement>) => {
+    handleChange(e, "language", e.target.value);
+  };
+
+  const handleSortChange = (e: SelectChangeEvent) => {
+    onUserInput("sort", e.target.value);
+  };
+
   return (
     <>
-    <Card sx={styles.root} variant="outlined">
-      <CardContent>
-        <Typography variant="h5" component="h1">
-          <FilterAltIcon fontSize="large" />
-          Filter the movies.
-        </Typography>
-        <TextField
-         sx={styles.formControl}
-         id="filled-search"
-         label="Search field"
-          type="search"
-         value={titleFilter}
-         variant="filled"
-         onChange={handleTextChange}
-        />
-        <FormControl sx={styles.formControl}>
-          <InputLabel id="genre-label">Genre</InputLabel>
-          <Select
-            labelId="genre-label"
-            id="genre-select"
-            value={genreFilter}
-            onChange={handleGenreChange}
-          >
-            {genres.map((genre) => {
-              return (
-                <MenuItem key={genre.id} value={genre.id}>
-                  {genre.name}
-                </MenuItem>
-              );
-            })}
-          </Select>
-        </FormControl>
-      </CardContent>
-    </Card>
-    <Card sx={styles.root} variant="outlined">
+      <Card sx={styles.root} variant="outlined">
+        <CardContent>
+          <Typography variant="h5" component="h1">
+            <FilterAltIcon fontSize="large" />
+            Filter the movies.
+          </Typography>
+          <TextField
+            sx={styles.formControl}
+            id="filled-search"
+            label="Search field"
+            type="search"
+            value={titleFilter}
+            variant="filled"
+            onChange={handleTextChange}
+          />
+          <FormControl sx={styles.formControl}>
+            <InputLabel id="genre-label">Genre</InputLabel>
+            <Select
+              labelId="genre-label"
+              id="genre-select"
+              value={genreFilter}
+              onChange={handleGenreChange}
+            >
+              {genres.map((genre) => {
+                return (
+                  <MenuItem key={genre.id} value={genre.id}>
+                    {genre.name}
+                  </MenuItem>
+                );
+              })}
+            </Select>
+          </FormControl>
+          <TextField
+            sx={styles.formControl}
+            id="release-year-search"
+            label="Release Year"
+            type="search"
+            value={yearFilter}
+            variant="filled"
+            onChange={handleYearChange}
+          />
+          <TextField
+            sx={styles.formControl}
+            id="language-search"
+            label="Language"
+            type="search"
+            value={languageFilter}
+            variant="filled"
+            onChange={handleLanguageChange}
+          />
+        </CardContent>
+      </Card>
+      <Card sx={styles.root} variant="outlined">
         <CardContent>
           <Typography variant="h5" component="h1">
             <SortIcon fontSize="large" />
             Sort the movies.
           </Typography>
+          <FormControl sx={styles.formControl}>
+            <InputLabel id="sort-label">Sort By</InputLabel>
+            <Select labelId="sort-label" id="sort-select" onChange={handleSortChange}>
+              <MenuItem value="release_date_desc">Year Released: Newest to Oldest</MenuItem>
+            </Select>
+          </FormControl>
         </CardContent>
       </Card>
-      </>
+    </>
   );
-}
+};
 
 export default FilterMoviesCard;
