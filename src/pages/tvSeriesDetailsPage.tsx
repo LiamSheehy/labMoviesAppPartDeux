@@ -2,6 +2,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import TVSeriesDetails from "../components/tvSeriesDetails";
 import PageTemplate from "../components/templateTVSeriesPage";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { getTVSeries, getTVSeriesDetails } from '../api/tmdb-api';
 import { useQuery } from "react-query";
 import Spinner from '../components/spinner';

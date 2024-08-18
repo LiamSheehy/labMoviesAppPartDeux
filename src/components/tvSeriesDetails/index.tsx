@@ -31,8 +31,16 @@ const styles = {
     },
 };
 
-const TVSeriesDetails: React.FC<TVSeriesDetailsProps> = (tvSeries) => {
-
+const TVSeriesDetails: React.FC<TVSeriesDetailsProps> = ({
+    overview = "No overview available",
+    genres = [],
+    episode_run_time = [],
+    vote_average = 0,
+    vote_count = 0,
+    first_air_date = "N/A",
+    number_of_seasons = 0,
+    number_of_episodes = 0,
+}) => {
     const [drawerOpen, setDrawerOpen] = useState(false);
 
     return (
@@ -42,28 +50,28 @@ const TVSeriesDetails: React.FC<TVSeriesDetailsProps> = (tvSeries) => {
             </Typography>
 
             <Typography variant="h6" component="p">
-                {tvSeries.overview}
+                {overview}
             </Typography>
 
             <Paper component="ul" sx={styles.chipSet}>
                 <li>
                     <Chip label="Genres" sx={styles.chipLabel} color="primary" />
                 </li>
-                {tvSeries.genres.map((g) => (
-                    <li key={g.name}>
+                {genres.map((g) => (
+                    <li key={g.id}>
                         <Chip label={g.name} />
                     </li>
                 ))}
             </Paper>
             <Paper component="ul" sx={styles.chipSet}>
-                <Chip icon={<AccessTimeIcon />} label={`${tvSeries.episode_run_time[0] || 'N/A'} min.`} />
+                <Chip icon={<AccessTimeIcon />} label={`${episode_run_time[0] || 'N/A'} min.`} />
                 <Chip
                     icon={<StarRateIcon />}
-                    label={`${tvSeries.vote_average} (${tvSeries.vote_count})`}
+                    label={`${vote_average} (${vote_count})`}
                 />
-                <Chip label={`First Aired: ${tvSeries.first_air_date}`} />
-                <Chip label={`Seasons: ${tvSeries.number_of_seasons}`} />
-                <Chip label={`Episodes: ${tvSeries.number_of_episodes}`} />
+                <Chip label={`First Aired: ${first_air_date}`} />
+                <Chip label={`Seasons: ${number_of_seasons}`} />
+                <Chip label={`Episodes: ${number_of_episodes}`} />
             </Paper>
             <Fab
                 color="secondary"
@@ -75,7 +83,7 @@ const TVSeriesDetails: React.FC<TVSeriesDetailsProps> = (tvSeries) => {
                 Reviews
             </Fab>
             <Drawer anchor="top" open={drawerOpen} onClose={() => setDrawerOpen(false)}>
-                <TVSeriesReviews {...tvSeries} />
+                <TVSeriesReviews genres={[]} production_countries={[]} seasons={[]} name={""} first_air_date={""} homepage={undefined} id={0} imdb_id={""} original_language={""} overview={""} vote_average={0} popularity={0} tagline={""} episode_run_time={[]} vote_count={0} number_of_seasons={0} number_of_episodes={0} />
             </Drawer>
         </>
     );

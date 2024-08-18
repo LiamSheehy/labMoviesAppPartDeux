@@ -12,7 +12,7 @@ import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd';
 import CalendarIcon from "@mui/icons-material/CalendarTodayTwoTone";
 import StarRateIcon from "@mui/icons-material/StarRate";
 import Grid from "@mui/material/Grid";
-import img from '../../images/film-poster-placeholder.png';
+import img from "../../images/film-poster-placeholder.png";
 import { BaseTVSeriesProps } from "../../types/interfaces"; 
 import { Link } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
@@ -80,7 +80,7 @@ const TVSeriesCard: React.FC<TVSeriesCardProps> = ({ tvSeries, action }) => {
       </CardContent>
       <CardActions disableSpacing>
         {action(tvSeries)}
-        <Link to={`/tvseries/${tvSeries.name}`}>
+        <Link to={`/tvseriespage/${tvSeries.id}`}>
           <Button variant="outlined" size="medium" color="primary">
             More Info ...
           </Button>
