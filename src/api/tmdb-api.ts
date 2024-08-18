@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-// Fetch movies with optional filters for release year, language, and pagination
 export const getMovies = (year?: number, language: string = 'en-US', sortBy: string = 'popularity.desc', page: number = 5) => {
   const yearQuery = year ? `&primary_release_year=${year}` : '';
   return fetch(
@@ -16,7 +15,7 @@ export const getMovies = (year?: number, language: string = 'en-US', sortBy: str
   });
 };
 
-// Fetch a single movie by ID
+
 export const getMovie = (id: string) => {
   return fetch(
     // @ts-ignore
@@ -33,7 +32,7 @@ export const getMovie = (id: string) => {
   });
 };
 
-// Fetch movie genres
+
 export const getGenres = () => {
   return fetch(
     // @ts-ignore
@@ -49,7 +48,7 @@ export const getGenres = () => {
   });
 };
 
-// Fetch movie images
+
 export const getMovieImages = (id: string | number) => {
   return fetch(
     // @ts-ignore
@@ -67,7 +66,7 @@ export const getMovieImages = (id: string | number) => {
   });
 };
 
-// Fetch movie reviews
+
 export const getMovieReviews = (id: string | number) => {
   return fetch(
     // @ts-ignore
@@ -85,7 +84,7 @@ export const getMovieReviews = (id: string | number) => {
   });
 };
 
-// Fetch upcoming movies with pagination
+
 export const getUpcomingMovies = (language: string = 'en-US', page: number = 1) => {
   return fetch(
     // @ts-ignore
@@ -102,7 +101,7 @@ export const getUpcomingMovies = (language: string = 'en-US', page: number = 1) 
   });
 };
 
-// Fetch TV series with optional filters for release year, language, and pagination
+
 export const getTVSeries = (year?: number, language: string = 'en-US', sortBy: string = 'popularity.desc', page: number = 1) => {
   const yearQuery = year ? `&first_air_date_year=${year}` : '';
   return fetch(
@@ -119,7 +118,7 @@ export const getTVSeries = (year?: number, language: string = 'en-US', sortBy: s
   });
 };
 
-// Fetch a single TV series by ID
+
 export const getTVSeriesDetails = (id: string) => {
   return fetch(
     // @ts-ignore
@@ -136,7 +135,6 @@ export const getTVSeriesDetails = (id: string) => {
   });
 };
 
-// Fetch TV series genres
 export const getTVGenres = () => {
   return fetch(
     // @ts-ignore
@@ -152,7 +150,7 @@ export const getTVGenres = () => {
   });
 };
 
-// Fetch TV series images
+
 export const getTVSeriesImages = (id: string | number) => {
   return fetch(
     // @ts-ignore
@@ -170,7 +168,7 @@ export const getTVSeriesImages = (id: string | number) => {
   });
 };
 
-// Fetch TV series reviews
+
 export const getTVSeriesReviews = (id: string | number) => {
   return fetch(
     // @ts-ignore
@@ -188,7 +186,6 @@ export const getTVSeriesReviews = (id: string | number) => {
   });
 };
 
-// Fetch upcoming TV series with pagination
 export const getUpcomingTVSeries = (language: string = 'en-US', page: number = 1) => {
   return fetch(
     // @ts-ignore
