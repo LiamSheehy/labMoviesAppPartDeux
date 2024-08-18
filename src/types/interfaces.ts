@@ -16,7 +16,6 @@ export interface BaseMovieProps {
   vote_count: number;
   favourite?: boolean;
   genre_ids?: number[];
-  media_type: 'movie';
 }
 
 export interface BaseTVSeriesProps {
@@ -38,7 +37,6 @@ export interface BaseTVSeriesProps {
   genre_ids?: number[];
   number_of_seasons: number;
   number_of_episodes: number;
-  media_type: 'tv';
 }
 
 export interface BaseMovieListProps { 

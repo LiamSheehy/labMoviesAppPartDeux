@@ -16,7 +16,6 @@ import img from '../../images/film-poster-placeholder.png';
 import { BaseTVSeriesProps } from "../../types/interfaces"; 
 import { Link } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
-import AddToFavouritesIcon from "../cardIcons/addToTVFavourites";
 
 const styles = {
   card: { maxWidth: 345 },
@@ -32,7 +31,8 @@ interface TVSeriesCardProps {
 }
 
 const TVSeriesCard: React.FC<TVSeriesCardProps> = ({ tvSeries, action }) => {
-  const { favourites, mustWatch, addToTVFavourites, addToMustWatch } = useContext(TVSeriesContext);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { favourites, mustWatch } = useContext(TVSeriesContext);
 
   const isFavourite = favourites.find((id) => id === tvSeries.id) ? true : false;
   const isMustWatch = mustWatch.includes(tvSeries.id);

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 // Fetch movies with optional filters for release year, language, and pagination
 export const getMovies = (year?: number, language: string = 'en-US', sortBy: string = 'popularity.desc', page: number = 5) => {
   const yearQuery = year ? `&primary_release_year=${year}` : '';

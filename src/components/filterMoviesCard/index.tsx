@@ -78,7 +78,7 @@ const FilterMoviesCard: React.FC<FilterMoviesCardProps> = ({
   };
 
   const handleSortChange = (e: SelectChangeEvent) => {
-    onUserInput("sort", e.target.value);
+    onUserInput("sort_by", e.target.value);
   };
 
   return (

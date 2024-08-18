@@ -24,7 +24,7 @@ const styles = {
 
 const TVSeriesHeader: React.FC<TVSeriesDetailsProps> = (tvSeries) => {
   const favourites = JSON.parse(localStorage.getItem("favourites") || "[]");
-  const isTVSeriesFavourite = favourites.find((favourite) => favourite.id === tvSeries.id) !== undefined;
+  const isTVSeriesFavourite = favourites.find((favourite: { id: number; }) => favourite.id === tvSeries.id) !== undefined;
 
   return (
     <Paper component="div" sx={styles.root}>

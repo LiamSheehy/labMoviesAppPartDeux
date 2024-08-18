@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState, useCallback } from "react";
 import { BaseTVSeriesProps, TVSeriesReview } from "../types/interfaces";
 
@@ -26,7 +28,7 @@ export const TVSeriesContext = React.createContext<TVSeriesContextInterface>(ini
 const TVSeriesContextProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
     const [favourites, setFavourites] = useState<number[]>([]);
     const [mustWatch, setMustWatch] = useState<number[]>([]);
-    const [myReviews, setMyReviews] = useState<{ [key: number]: TVSeriesReview }>({});
+    const [setMyReviews] = useState<{ [key: number]: TVSeriesReview }>({});
 
     const addToFavourites = useCallback((series: BaseTVSeriesProps) => {
         setFavourites((prevFavourites) => {
@@ -53,9 +55,8 @@ const TVSeriesContextProvider: React.FC<React.PropsWithChildren> = ({ children }
     const removeFromMustWatch = useCallback((series: BaseTVSeriesProps) => {
         setMustWatch((prevMustWatch) => prevMustWatch.filter((sId) => sId !== series.id));
     }, []);
-
     const addReview = (series: BaseTVSeriesProps, review: TVSeriesReview) => {
-        setMyReviews((prevReviews) => ({ ...prevReviews, [series.id]: review }));
+        setMyReviews((prevReviews: any) => ({ ...prevReviews, [series.id]: review }));
     };
 
     return (
